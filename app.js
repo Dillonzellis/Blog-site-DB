@@ -43,12 +43,17 @@ const Post = require("./models/Post");
 //   }
 // });
 
-let posts = [];
-
 app.get("/", function (req, res) {
-  res.render("home", {
-    startingContent: homeStartingContent,
-    posts: posts,
+  // res.render("home", {
+  //   startingContent: homeStartingContent,
+  //   posts: posts,
+  // });
+
+  Post.find({}, (err, foundPosts) => {
+    res.render("home", {
+      startingContent: homeStartingContent,
+      posts: foundPosts,
+    });
   });
 });
 
@@ -71,8 +76,6 @@ app.post("/compose", function (req, res) {
   });
 
   post.save();
-
-  posts.push(post);
 
   res.redirect("/");
 });
