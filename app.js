@@ -25,9 +25,11 @@ const Post = require("./models/Post");
 // Est DB and starting data
 
 // const post1 = new Post({
+//   title: "title1",
 //   content: "starting content post",
 // });
 // const post2 = new Post({
+//   title: "title2",
 //   content: "starting content post2",
 // });
 
@@ -63,10 +65,12 @@ app.get("/compose", function (req, res) {
 });
 
 app.post("/compose", function (req, res) {
-  const post = {
+  const post = new Post({
     title: req.body.postTitle,
     content: req.body.postBody,
-  };
+  });
+
+  post.save();
 
   posts.push(post);
 
