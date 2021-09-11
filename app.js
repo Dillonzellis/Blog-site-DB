@@ -44,11 +44,6 @@ const Post = require("./models/Post");
 // });
 
 app.get("/", function (req, res) {
-  // res.render("home", {
-  //   startingContent: homeStartingContent,
-  //   posts: posts,
-  // });
-
   Post.find({}, (err, foundPosts) => {
     res.render("home", {
       startingContent: homeStartingContent,
@@ -75,9 +70,11 @@ app.post("/compose", function (req, res) {
     content: req.body.postBody,
   });
 
-  post.save();
-
-  res.redirect("/");
+  post.save((err) => {
+    if (!err) {
+      res.redirect("/");
+    }
+  });
 });
 
 app.get("/posts/:postName", function (req, res) {
