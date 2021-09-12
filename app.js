@@ -77,13 +77,13 @@ app.post("/compose", function (req, res) {
   });
 });
 
-app.get("/posts/:postName", function (req, res) {
-  const requestedTitle = _.lowerCase(req.params.postName);
+app.get("/posts/:postid", (req, res) => {
+  const requestedPostId = req.params.postid;
 
-  posts.forEach(function (post) {
-    const storedTitle = _.lowerCase(post.title);
-
-    if (storedTitle === requestedTitle) {
+  Post.findOne({ _id: requestedPostId }, (err, post) => {
+    if (err) {
+      console.log("fucked");
+    } else {
       res.render("post", {
         title: post.title,
         content: post.content,

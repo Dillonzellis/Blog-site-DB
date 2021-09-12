@@ -9,7 +9,16 @@
 <h1><%=post.title%></h1>
 <p>
   <%=post.content.substring(0, 100) + " ..."%>
-  <a href="/posts/<%=post.title%>">Read More</a>
+  <a href="/posts/<%=post.id%>">Read More</a>
 </p>
 
 <% }) %> <%- include("partials/footer"); -%>
+
+<!-- app.get("/", function (req, res) {
+  Post.find({}, (err, foundPosts) => {
+    res.render("home", {
+      startingContent: homeStartingContent,
+      posts: foundPosts,
+    });
+  });
+}); -->
