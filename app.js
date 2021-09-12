@@ -82,7 +82,7 @@ app.get("/posts/:postid", (req, res) => {
 
   Post.findOne({ _id: requestedPostId }, (err, post) => {
     if (err) {
-      console.log("fucked");
+      console.log(err);
     } else {
       res.render("post", {
         title: post.title,
